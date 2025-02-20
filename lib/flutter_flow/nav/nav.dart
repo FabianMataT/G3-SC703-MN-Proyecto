@@ -94,6 +94,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: LogiRegistroWidget.routeName,
           path: LogiRegistroWidget.routePath,
           builder: (context, params) => LogiRegistroWidget(),
+        ),
+        FFRoute(
+          name: ReportesWidget.routeName,
+          path: ReportesWidget.routePath,
+          builder: (context, params) => ReportesWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

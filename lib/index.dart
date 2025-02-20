@@ -13,3 +13,4 @@ export '/pages/carrito/finalizar_compra/finalizar_compra_widget.dart'
 export '/pedidos/pedidos_widget.dart' show PedidosWidget;
 export '/pedidos_detalle/pedidos_detalle_widget.dart' show PedidosDetalleWidget;
 export '/logi_registro/logi_registro_widget.dart' show LogiRegistroWidget;
+export '/reportes/reportes/reportes_widget.dart' show ReportesWidget;

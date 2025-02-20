@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -32,17 +33,67 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => HomePageWidget(),
+      errorBuilder: (context, state) => MenuWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => HomePageWidget(),
+          builder: (context, _) => MenuWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => HomePageWidget(),
+          name: MenuWidget.routeName,
+          path: MenuWidget.routePath,
+          builder: (context, params) => MenuWidget(),
+        ),
+        FFRoute(
+          name: CategoriasWidget.routeName,
+          path: CategoriasWidget.routePath,
+          builder: (context, params) => CategoriasWidget(),
+        ),
+        FFRoute(
+          name: ComandaWidget.routeName,
+          path: ComandaWidget.routePath,
+          builder: (context, params) => ComandaWidget(),
+        ),
+        FFRoute(
+          name: MenuAdminWidget.routeName,
+          path: MenuAdminWidget.routePath,
+          builder: (context, params) => MenuAdminWidget(),
+        ),
+        FFRoute(
+          name: AnadirEditarProductoWidget.routeName,
+          path: AnadirEditarProductoWidget.routePath,
+          builder: (context, params) => AnadirEditarProductoWidget(),
+        ),
+        FFRoute(
+          name: AgregarProductoWidget.routeName,
+          path: AgregarProductoWidget.routePath,
+          builder: (context, params) => AgregarProductoWidget(),
+        ),
+        FFRoute(
+          name: CarritoWidget.routeName,
+          path: CarritoWidget.routePath,
+          builder: (context, params) => CarritoWidget(),
+        ),
+        FFRoute(
+          name: FinalizarCompraWidget.routeName,
+          path: FinalizarCompraWidget.routePath,
+          builder: (context, params) => FinalizarCompraWidget(),
+        ),
+        FFRoute(
+          name: PedidosWidget.routeName,
+          path: PedidosWidget.routePath,
+          builder: (context, params) => PedidosWidget(),
+        ),
+        FFRoute(
+          name: PedidosDetalleWidget.routeName,
+          path: PedidosDetalleWidget.routePath,
+          builder: (context, params) => PedidosDetalleWidget(),
+        ),
+        FFRoute(
+          name: LogiRegistroWidget.routeName,
+          path: LogiRegistroWidget.routePath,
+          builder: (context, params) => LogiRegistroWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

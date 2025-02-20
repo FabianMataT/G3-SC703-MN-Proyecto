@@ -1,25 +1,28 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'home_page_model.dart';
-export 'home_page_model.dart';
+import 'comanda_model.dart';
+export 'comanda_model.dart';
 
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+class ComandaWidget extends StatefulWidget {
+  const ComandaWidget({super.key});
+
+  static String routeName = 'Comanda';
+  static String routePath = '/comanda';
 
   @override
-  State<HomePageWidget> createState() => _HomePageWidgetState();
+  State<ComandaWidget> createState() => _ComandaWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  late HomePageModel _model;
+class _ComandaWidgetState extends State<ComandaWidget> {
+  late ComandaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    _model = createModel(context, () => ComandaModel());
   }
 
   @override
@@ -40,10 +43,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
+          backgroundColor: FlutterFlowTheme.of(context).smokers2,
           automaticallyImplyLeading: false,
           title: Text(
-            'Page Title',
+            'Comandas',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Inter Tight',
                   color: Colors.white,
@@ -59,7 +62,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [],
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  ListView(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    children: [],
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

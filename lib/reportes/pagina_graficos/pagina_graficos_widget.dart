@@ -1,10 +1,13 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'pagina_graficos_model.dart';
 export 'pagina_graficos_model.dart';
 
@@ -38,6 +41,8 @@ class _PaginaGraficosWidgetState extends State<PaginaGraficosWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -206,11 +211,85 @@ class _PaginaGraficosWidgetState extends State<PaginaGraficosWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Expanded(
-                                  child: ListView(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    children: [],
+                                  child:
+                                      StreamBuilder<List<CustomerOrdersRecord>>(
+                                    stream: queryCustomerOrdersRecord(),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<CustomerOrdersRecord>
+                                          listViewCustomerOrdersRecordList =
+                                          snapshot.data!;
+
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            listViewCustomerOrdersRecordList
+                                                .length,
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewCustomerOrdersRecord =
+                                              listViewCustomerOrdersRecordList[
+                                                  listViewIndex];
+                                          return Text(
+                                            'Total',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Builder(
+                                    builder: (context) {
+                                      final total = FFAppState()
+                                          .subtotalCart
+                                          .map((e) => formatNumber(
+                                                e,
+                                                formatType: FormatType.decimal,
+                                              ))
+                                          .toList();
+
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: List.generate(total.length,
+                                            (totalIndex) {
+                                          final totalItem = total[totalIndex];
+                                          return Text(
+                                            'Hello World',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          );
+                                        }),
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
@@ -233,8 +312,8 @@ class _PaginaGraficosWidgetState extends State<PaginaGraficosWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            context.pushNamed(ReportesWidget.routeName);
                           },
                           text: 'Regresar',
                           options: FFButtonOptions(

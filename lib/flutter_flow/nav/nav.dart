@@ -197,6 +197,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: PaginaGraficosWidget.routeName,
           path: PaginaGraficosWidget.routePath,
           builder: (context, params) => PaginaGraficosWidget(),
+        ),
+        FFRoute(
+          name: GraficosTipoentregaWidget.routeName,
+          path: GraficosTipoentregaWidget.routePath,
+          builder: (context, params) => GraficosTipoentregaWidget(),
+        ),
+        FFRoute(
+          name: ProductosMasvendidosWidget.routeName,
+          path: ProductosMasvendidosWidget.routePath,
+          builder: (context, params) => ProductosMasvendidosWidget(),
+        ),
+        FFRoute(
+          name: ProductosMenosvendidosWidget.routeName,
+          path: ProductosMenosvendidosWidget.routePath,
+          builder: (context, params) => ProductosMenosvendidosWidget(),
+        ),
+        FFRoute(
+          name: ProductosVendidosWidget.routeName,
+          path: ProductosVendidosWidget.routePath,
+          builder: (context, params) => ProductosVendidosWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -21,3 +21,11 @@ export '/categorias/detalle_producto/detalle_producto_widget.dart'
     show DetalleProductoWidget;
 export '/reportes/pagina_graficos/pagina_graficos_widget.dart'
     show PaginaGraficosWidget;
+export '/reportes/graficos_tipoentrega/graficos_tipoentrega_widget.dart'
+    show GraficosTipoentregaWidget;
+export '/reportes/productos_masvendidos/productos_masvendidos_widget.dart'
+    show ProductosMasvendidosWidget;
+export '/reportes/productos_menosvendidos/productos_menosvendidos_widget.dart'
+    show ProductosMenosvendidosWidget;
+export '/reportes/productos_vendidos/productos_vendidos_widget.dart'
+    show ProductosVendidosWidget;

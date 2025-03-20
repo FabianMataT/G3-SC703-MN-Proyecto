@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "702813150215",
+    "project_id": "smokersbbq-19b20",
+    "storage_bucket": "smokersbbq-19b20.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702813150215:android:3663643c0b32bf4f7f5ea2",
+        "android_client_info": {
+          "package_name": "com.mycompany.g3sc703mnproyecto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "702813150215-jc3ra27ohfgfk0rdf8bk36tcl6oqteo1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.g3sc703mnproyecto",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "702813150215-npt05oa0irthd3ii7v1oqcmfij01r2s4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaXmyNEOiO3x8h7VzCX09M_qaXFcZFu40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "702813150215-npt05oa0irthd3ii7v1oqcmfij01r2s4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "702813150215-rfqfccmc4qa2ki357p721cdu08rs6gtd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.g3sc703mnproyecto"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

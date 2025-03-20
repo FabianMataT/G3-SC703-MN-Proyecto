@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/index.dart';
-import 'menu_widget.dart' show MenuWidget;
+import 'gestion_de_productos_widget.dart' show GestionDeProductosWidget;
 import 'package:flutter/material.dart';
 
-class MenuModel extends FlutterFlowModel<MenuWidget> {
+class GestionDeProductosModel
+    extends FlutterFlowModel<GestionDeProductosWidget> {
   @override
   void initState(BuildContext context) {}
 

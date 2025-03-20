@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'menu_admin_widget.dart' show MenuAdminWidget;
+import 'detalle_producto_widget.dart' show DetalleProductoWidget;
 import 'package:flutter/material.dart';
 
-class MenuAdminModel extends FlutterFlowModel<MenuAdminWidget> {
+class DetalleProductoModel extends FlutterFlowModel<DetalleProductoWidget> {
   @override
   void initState(BuildContext context) {}
 

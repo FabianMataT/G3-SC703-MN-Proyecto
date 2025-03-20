@@ -1,7 +1,10 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -511,9 +514,28 @@ class _LogiRegistroWidgetState extends State<LogiRegistroWidget>
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 16.0),
                                                   child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
+                                                    onPressed: () async {
+                                                      GoRouter.of(context)
+                                                          .prepareAuthEvent();
+
+                                                      final user =
+                                                          await authManager
+                                                              .signInWithEmail(
+                                                        context,
+                                                        _model
+                                                            .emailAddressTextController
+                                                            .text,
+                                                        _model
+                                                            .passwordTextController
+                                                            .text,
+                                                      );
+                                                      if (user == null) {
+                                                        return;
+                                                      }
+
+                                                      context.goNamedAuth(
+                                                          HomeWidget.routeName,
+                                                          context.mounted);
                                                     },
                                                     text: 'Ingresar',
                                                     options: FFButtonOptions(
@@ -1152,9 +1174,54 @@ class _LogiRegistroWidgetState extends State<LogiRegistroWidget>
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 16.0),
                                                   child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
+                                                    onPressed: () async {
+                                                      GoRouter.of(context)
+                                                          .prepareAuthEvent();
+                                                      if (_model
+                                                              .passwordCreateTextController
+                                                              .text !=
+                                                          _model
+                                                              .passwordConfirmTextController
+                                                              .text) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              'Passwords don\'t match!',
+                                                            ),
+                                                          ),
+                                                        );
+                                                        return;
+                                                      }
+
+                                                      final user = await authManager
+                                                          .createAccountWithEmail(
+                                                        context,
+                                                        _model
+                                                            .emailAddressCreateTextController
+                                                            .text,
+                                                        _model
+                                                            .passwordCreateTextController
+                                                            .text,
+                                                      );
+                                                      if (user == null) {
+                                                        return;
+                                                      }
+
+                                                      await UsersRecord
+                                                          .collection
+                                                          .doc(user.uid)
+                                                          .update(
+                                                              createUsersRecordData(
+                                                            email: '',
+                                                            createdTime:
+                                                                getCurrentTimestamp,
+                                                          ));
+
+                                                      context.goNamedAuth(
+                                                          HomeWidget.routeName,
+                                                          context.mounted);
                                                     },
                                                     text: 'Crear Cuenta',
                                                     options: FFButtonOptions(

@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'logi_registro_widget.dart' show LogiRegistroWidget;
 import 'package:flutter/material.dart';
 

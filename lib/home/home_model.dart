@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'anadir_editar_producto_widget.dart' show AnadirEditarProductoWidget;
+import '/index.dart';
+import 'home_widget.dart' show HomeWidget;
 import 'package:flutter/material.dart';
 
-class AnadirEditarProductoModel
-    extends FlutterFlowModel<AnadirEditarProductoWidget> {
+class HomeModel extends FlutterFlowModel<HomeWidget> {
   @override
   void initState(BuildContext context) {}
 

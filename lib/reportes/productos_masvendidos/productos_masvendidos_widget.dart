@@ -292,7 +292,7 @@ class _ProductosMasvendidosWidgetState
                                               final totalItem =
                                                   total[totalIndex];
                                               return Text(
-                                                'Hello World',
+                                                'Fecha:',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium

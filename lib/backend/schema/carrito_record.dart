@@ -46,6 +46,11 @@ class CarritoRecord extends FirestoreRecord {
   String get extraDescription => _extraDescription ?? '';
   bool hasExtraDescription() => _extraDescription != null;
 
+  // "total" field.
+  double? _total;
+  double get total => _total ?? 0.0;
+  bool hasTotal() => _total != null;
+
   void _initializeFields() {
     _userRef = snapshotData['userRef'] as DocumentReference?;
     _productRef = snapshotData['productRef'] as DocumentReference?;
@@ -53,6 +58,7 @@ class CarritoRecord extends FirestoreRecord {
     _cantidad = castToType<int>(snapshotData['cantidad']);
     _subtotal = castToType<double>(snapshotData['subtotal']);
     _extraDescription = snapshotData['extraDescription'] as String?;
+    _total = castToType<double>(snapshotData['total']);
   }
 
   static CollectionReference get collection =>
@@ -95,6 +101,7 @@ Map<String, dynamic> createCarritoRecordData({
   int? cantidad,
   double? subtotal,
   String? extraDescription,
+  double? total,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -103,6 +110,7 @@ Map<String, dynamic> createCarritoRecordData({
       'cantidad': cantidad,
       'subtotal': subtotal,
       'extraDescription': extraDescription,
+      'total': total,
     }.withoutNulls,
   );
 
@@ -120,7 +128,8 @@ class CarritoRecordDocumentEquality implements Equality<CarritoRecord> {
         listEquality.equals(e1?.extraIngredients, e2?.extraIngredients) &&
         e1?.cantidad == e2?.cantidad &&
         e1?.subtotal == e2?.subtotal &&
-        e1?.extraDescription == e2?.extraDescription;
+        e1?.extraDescription == e2?.extraDescription &&
+        e1?.total == e2?.total;
   }
 
   @override
@@ -130,7 +139,8 @@ class CarritoRecordDocumentEquality implements Equality<CarritoRecord> {
         e?.extraIngredients,
         e?.cantidad,
         e?.subtotal,
-        e?.extraDescription
+        e?.extraDescription,
+        e?.total
       ]);
 
   @override

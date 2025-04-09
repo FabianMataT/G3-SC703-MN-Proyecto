@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'detalle_producto_model.dart';
 export 'detalle_producto_model.dart';
@@ -74,10 +75,34 @@ class _DetalleProductoWidgetState extends State<DetalleProductoWidget> {
             appBar: AppBar(
               backgroundColor: FlutterFlowTheme.of(context).smokers2,
               automaticallyImplyLeading: false,
+              leading: FFButtonWidget(
+                onPressed: () async {
+                  context.safePop();
+                },
+                text: 'Atrás',
+                icon: Icon(
+                  Icons.arrow_back_rounded,
+                  size: 15.0,
+                ),
+                options: FFButtonOptions(
+                  height: 40.0,
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  iconPadding:
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: FlutterFlowTheme.of(context).smokers2,
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily: 'Inter Tight',
+                        color: Colors.white,
+                        letterSpacing: 0.0,
+                      ),
+                  elevation: 0.0,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
               title: Text(
-                'Page Title',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Inter Tight',
+                detalleProductoProductsRecord.name,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Inter',
                       color: Colors.white,
                       fontSize: 22.0,
                       letterSpacing: 0.0,
@@ -105,10 +130,41 @@ class _DetalleProductoWidgetState extends State<DetalleProductoWidget> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
-                            'https://picsum.photos/seed/71/600',
+                            detalleProductoProductsRecord.image,
                             width: 200.0,
                             height: 200.0,
                             fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 20.0, 20.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Detalle:',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Inter Tight',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              Text(
+                                detalleProductoProductsRecord.description,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Inter Tight',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -131,7 +187,7 @@ class _DetalleProductoWidgetState extends State<DetalleProductoWidget> {
                                     ),
                               ),
                               Text(
-                                'Hello World',
+                                detalleProductoProductsRecord.price.toString(),
                                 style: FlutterFlowTheme.of(context)
                                     .titleLarge
                                     .override(

@@ -1,6 +1,8 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'categorias_model.dart';
 export 'categorias_model.dart';
@@ -46,8 +48,31 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).smokers2,
           automaticallyImplyLeading: false,
+          leading: FFButtonWidget(
+            onPressed: () async {
+              context.safePop();
+            },
+            text: 'Atrás',
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              size: 15.0,
+            ),
+            options: FFButtonOptions(
+              height: 40.0,
+              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+              color: FlutterFlowTheme.of(context).smokers2,
+              textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                    fontFamily: 'Inter Tight',
+                    color: Colors.white,
+                    letterSpacing: 0.0,
+                  ),
+              elevation: 0.0,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
           title: Text(
-            'Page Title',
+            'Categorias',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Inter Tight',
                   color: Colors.white,
@@ -87,25 +112,33 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
                       List<CategoriesRecord> listViewCategoriesRecordList =
                           snapshot.data!;
 
-                      return InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(CategoriasWidget.routeName);
-                        },
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: listViewCategoriesRecordList.length,
-                          itemBuilder: (context, listViewIndex) {
-                            final listViewCategoriesRecord =
-                                listViewCategoriesRecordList[listViewIndex];
-                            return Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 30.0, 0.0, 0.0),
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listViewCategoriesRecordList.length,
+                        itemBuilder: (context, listViewIndex) {
+                          final listViewCategoriesRecord =
+                              listViewCategoriesRecordList[listViewIndex];
+                          return Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 30.0, 0.0, 0.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  ListadoProductosWidget.routeName,
+                                  queryParameters: {
+                                    'categoryRef': serializeParam(
+                                      listViewCategoriesRecord.reference,
+                                      ParamType.DocumentReference,
+                                    ),
+                                  }.withoutNulls,
+                                );
+                              },
                               child: Material(
                                 color: Colors.transparent,
                                 child: ListTile(
@@ -135,9 +168,9 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
                       );
                     },
                   ),

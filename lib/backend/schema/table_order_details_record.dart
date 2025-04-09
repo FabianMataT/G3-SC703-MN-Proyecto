@@ -46,6 +46,11 @@ class TableOrderDetailsRecord extends FirestoreRecord {
   double get total => _total ?? 0.0;
   bool hasTotal() => _total != null;
 
+  // "amount" field.
+  int? _amount;
+  int get amount => _amount ?? 0;
+  bool hasAmount() => _amount != null;
+
   void _initializeFields() {
     _tableOrderRef = snapshotData['table_orderRef'] as DocumentReference?;
     _productRef = snapshotData['productRef'] as DocumentReference?;
@@ -53,6 +58,7 @@ class TableOrderDetailsRecord extends FirestoreRecord {
     _description = snapshotData['description'] as String?;
     _subtotal = castToType<double>(snapshotData['subtotal']);
     _total = castToType<double>(snapshotData['total']);
+    _amount = castToType<int>(snapshotData['amount']);
   }
 
   static CollectionReference get collection =>
@@ -96,6 +102,7 @@ Map<String, dynamic> createTableOrderDetailsRecordData({
   String? description,
   double? subtotal,
   double? total,
+  int? amount,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -104,6 +111,7 @@ Map<String, dynamic> createTableOrderDetailsRecordData({
       'description': description,
       'subtotal': subtotal,
       'total': total,
+      'amount': amount,
     }.withoutNulls,
   );
 
@@ -122,7 +130,8 @@ class TableOrderDetailsRecordDocumentEquality
         listEquality.equals(e1?.extraIngredients, e2?.extraIngredients) &&
         e1?.description == e2?.description &&
         e1?.subtotal == e2?.subtotal &&
-        e1?.total == e2?.total;
+        e1?.total == e2?.total &&
+        e1?.amount == e2?.amount;
   }
 
   @override
@@ -132,7 +141,8 @@ class TableOrderDetailsRecordDocumentEquality
         e?.extraIngredients,
         e?.description,
         e?.subtotal,
-        e?.total
+        e?.total,
+        e?.amount
       ]);
 
   @override

@@ -50,6 +50,21 @@ class TableOrdersRecord extends FirestoreRecord {
   bool get paid => _paid ?? false;
   bool hasPaid() => _paid != null;
 
+  // "place_to_eat" field.
+  bool? _placeToEat;
+  bool get placeToEat => _placeToEat ?? false;
+  bool hasPlaceToEat() => _placeToEat != null;
+
+  // "payment_recipt" field.
+  String? _paymentRecipt;
+  String get paymentRecipt => _paymentRecipt ?? '';
+  bool hasPaymentRecipt() => _paymentRecipt != null;
+
+  // "date" field.
+  DateTime? _date;
+  DateTime? get date => _date;
+  bool hasDate() => _date != null;
+
   void _initializeFields() {
     _userRef = snapshotData['userRef'] as DocumentReference?;
     _paymentMethodRef = snapshotData['payment_methodRef'] as DocumentReference?;
@@ -58,6 +73,9 @@ class TableOrdersRecord extends FirestoreRecord {
     _total = castToType<double>(snapshotData['total']);
     _stateRef = snapshotData['stateRef'] as DocumentReference?;
     _paid = snapshotData['paid'] as bool?;
+    _placeToEat = snapshotData['place_to_eat'] as bool?;
+    _paymentRecipt = snapshotData['payment_recipt'] as String?;
+    _date = snapshotData['date'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -102,6 +120,9 @@ Map<String, dynamic> createTableOrdersRecordData({
   double? total,
   DocumentReference? stateRef,
   bool? paid,
+  bool? placeToEat,
+  String? paymentRecipt,
+  DateTime? date,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -112,6 +133,9 @@ Map<String, dynamic> createTableOrdersRecordData({
       'total': total,
       'stateRef': stateRef,
       'paid': paid,
+      'place_to_eat': placeToEat,
+      'payment_recipt': paymentRecipt,
+      'date': date,
     }.withoutNulls,
   );
 
@@ -129,7 +153,10 @@ class TableOrdersRecordDocumentEquality implements Equality<TableOrdersRecord> {
         e1?.subtotal == e2?.subtotal &&
         e1?.total == e2?.total &&
         e1?.stateRef == e2?.stateRef &&
-        e1?.paid == e2?.paid;
+        e1?.paid == e2?.paid &&
+        e1?.placeToEat == e2?.placeToEat &&
+        e1?.paymentRecipt == e2?.paymentRecipt &&
+        e1?.date == e2?.date;
   }
 
   @override
@@ -140,7 +167,10 @@ class TableOrdersRecordDocumentEquality implements Equality<TableOrdersRecord> {
         e?.subtotal,
         e?.total,
         e?.stateRef,
-        e?.paid
+        e?.paid,
+        e?.placeToEat,
+        e?.paymentRecipt,
+        e?.date
       ]);
 
   @override

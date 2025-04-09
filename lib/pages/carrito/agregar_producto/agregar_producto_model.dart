@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
 import 'agregar_producto_widget.dart' show AgregarProductoWidget;
 import 'package:flutter/material.dart';
@@ -19,6 +20,9 @@ class AgregarProductoModel extends FlutterFlowModel<AgregarProductoWidget> {
       addicionalDescriptionTextControllerValidator;
   // State field(s) for CountController widget.
   int? countControllerValue;
+  // State field(s) for DropDown widget.
+  String? dropDownValue;
+  FormFieldController<String>? dropDownValueController;
 
   @override
   void initState(BuildContext context) {}

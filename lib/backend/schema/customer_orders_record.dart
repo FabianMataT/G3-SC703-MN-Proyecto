@@ -31,11 +31,6 @@ class CustomerOrdersRecord extends FirestoreRecord {
   String get deliveryMethod => _deliveryMethod ?? '';
   bool hasDeliveryMethod() => _deliveryMethod != null;
 
-  // "description" field.
-  String? _description;
-  String get description => _description ?? '';
-  bool hasDescription() => _description != null;
-
   // "payment_receipt" field.
   String? _paymentReceipt;
   String get paymentReceipt => _paymentReceipt ?? '';
@@ -50,11 +45,6 @@ class CustomerOrdersRecord extends FirestoreRecord {
   double? _total;
   double get total => _total ?? 0.0;
   bool hasTotal() => _total != null;
-
-  // "stateRef" field.
-  DocumentReference? _stateRef;
-  DocumentReference? get stateRef => _stateRef;
-  bool hasStateRef() => _stateRef != null;
 
   // "paid" field.
   bool? _paid;
@@ -71,18 +61,34 @@ class CustomerOrdersRecord extends FirestoreRecord {
   String get deliveryDirection => _deliveryDirection ?? '';
   bool hasDeliveryDirection() => _deliveryDirection != null;
 
+  // "tax" field.
+  double? _tax;
+  double get tax => _tax ?? 0.0;
+  bool hasTax() => _tax != null;
+
+  // "stateRef" field.
+  DocumentReference? _stateRef;
+  DocumentReference? get stateRef => _stateRef;
+  bool hasStateRef() => _stateRef != null;
+
+  // "description" field.
+  String? _description;
+  String get description => _description ?? '';
+  bool hasDescription() => _description != null;
+
   void _initializeFields() {
     _userRef = snapshotData['userRef'] as DocumentReference?;
     _paymentMethodRef = snapshotData['payment_methodRef'] as DocumentReference?;
     _deliveryMethod = snapshotData['delivery_method'] as String?;
-    _description = snapshotData['description'] as String?;
     _paymentReceipt = snapshotData['payment_receipt'] as String?;
     _subtotal = castToType<double>(snapshotData['subtotal']);
     _total = castToType<double>(snapshotData['total']);
-    _stateRef = snapshotData['stateRef'] as DocumentReference?;
     _paid = snapshotData['paid'] as bool?;
     _orderDate = snapshotData['order_date'] as DateTime?;
     _deliveryDirection = snapshotData['delivery_direction'] as String?;
+    _tax = castToType<double>(snapshotData['tax']);
+    _stateRef = snapshotData['stateRef'] as DocumentReference?;
+    _description = snapshotData['description'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -123,28 +129,30 @@ Map<String, dynamic> createCustomerOrdersRecordData({
   DocumentReference? userRef,
   DocumentReference? paymentMethodRef,
   String? deliveryMethod,
-  String? description,
   String? paymentReceipt,
   double? subtotal,
   double? total,
-  DocumentReference? stateRef,
   bool? paid,
   DateTime? orderDate,
   String? deliveryDirection,
+  double? tax,
+  DocumentReference? stateRef,
+  String? description,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'userRef': userRef,
       'payment_methodRef': paymentMethodRef,
       'delivery_method': deliveryMethod,
-      'description': description,
       'payment_receipt': paymentReceipt,
       'subtotal': subtotal,
       'total': total,
-      'stateRef': stateRef,
       'paid': paid,
       'order_date': orderDate,
       'delivery_direction': deliveryDirection,
+      'tax': tax,
+      'stateRef': stateRef,
+      'description': description,
     }.withoutNulls,
   );
 
@@ -160,14 +168,15 @@ class CustomerOrdersRecordDocumentEquality
     return e1?.userRef == e2?.userRef &&
         e1?.paymentMethodRef == e2?.paymentMethodRef &&
         e1?.deliveryMethod == e2?.deliveryMethod &&
-        e1?.description == e2?.description &&
         e1?.paymentReceipt == e2?.paymentReceipt &&
         e1?.subtotal == e2?.subtotal &&
         e1?.total == e2?.total &&
-        e1?.stateRef == e2?.stateRef &&
         e1?.paid == e2?.paid &&
         e1?.orderDate == e2?.orderDate &&
-        e1?.deliveryDirection == e2?.deliveryDirection;
+        e1?.deliveryDirection == e2?.deliveryDirection &&
+        e1?.tax == e2?.tax &&
+        e1?.stateRef == e2?.stateRef &&
+        e1?.description == e2?.description;
   }
 
   @override
@@ -175,14 +184,15 @@ class CustomerOrdersRecordDocumentEquality
         e?.userRef,
         e?.paymentMethodRef,
         e?.deliveryMethod,
-        e?.description,
         e?.paymentReceipt,
         e?.subtotal,
         e?.total,
-        e?.stateRef,
         e?.paid,
         e?.orderDate,
-        e?.deliveryDirection
+        e?.deliveryDirection,
+        e?.tax,
+        e?.stateRef,
+        e?.description
       ]);
 
   @override

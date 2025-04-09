@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 
 class GestionDeProductosModel
     extends FlutterFlowModel<GestionDeProductosWidget> {
+  ///  Local state fields for this page.
+
+  String tipoSeleccionado = '\"\"';
+
   @override
   void initState(BuildContext context) {}
 

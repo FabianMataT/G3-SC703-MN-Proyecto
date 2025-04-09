@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'pedidos_detalle_widget.dart' show PedidosDetalleWidget;
+import 'navbar_widget.dart' show NavbarWidget;
 import 'package:flutter/material.dart';
 
-class PedidosDetalleModel extends FlutterFlowModel<PedidosDetalleWidget> {
+class NavbarModel extends FlutterFlowModel<NavbarWidget> {
   @override
   void initState(BuildContext context) {}
 

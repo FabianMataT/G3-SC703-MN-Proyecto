@@ -1,8 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'comanda_widget.dart' show ComandaWidget;
+import '/index.dart';
+import 'listado_comanda_widget.dart' show ListadoComandaWidget;
 import 'package:flutter/material.dart';
 
-class ComandaModel extends FlutterFlowModel<ComandaWidget> {
+class ListadoComandaModel extends FlutterFlowModel<ListadoComandaWidget> {
   @override
   void initState(BuildContext context) {}
 

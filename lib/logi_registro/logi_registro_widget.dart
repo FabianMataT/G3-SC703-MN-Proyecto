@@ -1214,9 +1214,17 @@ class _LogiRegistroWidgetState extends State<LogiRegistroWidget>
                                                           .doc(user.uid)
                                                           .update(
                                                               createUsersRecordData(
-                                                            email: '',
+                                                            email: (_model
+                                                                        .emailAddressCreateFocusNode
+                                                                        ?.hasFocus ??
+                                                                    false)
+                                                                .toString(),
                                                             createdTime:
                                                                 getCurrentTimestamp,
+                                                            displayName: _model
+                                                                .emailAddressCreateTextController
+                                                                .text,
+                                                            role: 'Admin',
                                                           ));
 
                                                       context.goNamedAuth(

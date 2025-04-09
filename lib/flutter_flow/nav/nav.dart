@@ -86,9 +86,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? HomeWidget() : LogiRegistroWidget(),
         ),
         FFRoute(
-          name: ComandaWidget.routeName,
-          path: ComandaWidget.routePath,
-          builder: (context, params) => ComandaWidget(),
+          name: ListadoComandaWidget.routeName,
+          path: ListadoComandaWidget.routePath,
+          builder: (context, params) => ListadoComandaWidget(),
         ),
         FFRoute(
           name: AgregarProductoWidget.routeName,
@@ -122,7 +122,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: PedidosDetalleWidget.routeName,
           path: PedidosDetalleWidget.routePath,
-          builder: (context, params) => PedidosDetalleWidget(),
+          asyncParams: {
+            'orderDocumentID':
+                getDoc(['customer_orders'], CustomerOrdersRecord.fromSnapshot),
+          },
+          builder: (context, params) => PedidosDetalleWidget(
+            orderDocumentID: params.getParam(
+              'orderDocumentID',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
           name: LogiRegistroWidget.routeName,
@@ -167,12 +176,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: ListadoProductosWidget.routeName,
           path: ListadoProductosWidget.routePath,
           builder: (context, params) => ListadoProductosWidget(
-            categories: params.getParam(
-              'categories',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['categories'],
-            ),
             categoryRef: params.getParam(
               'categoryRef',
               ParamType.DocumentReference,
@@ -217,6 +220,160 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: ProductosVendidosWidget.routeName,
           path: ProductosVendidosWidget.routePath,
           builder: (context, params) => ProductosVendidosWidget(),
+        ),
+        FFRoute(
+          name: DetalleComandaWidget.routeName,
+          path: DetalleComandaWidget.routePath,
+          builder: (context, params) => DetalleComandaWidget(
+            ordenParam: params.getParam(
+              'ordenParam',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['customer_orders'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: IndexWidget.routeName,
+          path: IndexWidget.routePath,
+          builder: (context, params) => IndexWidget(),
+        ),
+        FFRoute(
+          name: CreateWidget.routeName,
+          path: CreateWidget.routePath,
+          builder: (context, params) => CreateWidget(),
+        ),
+        FFRoute(
+          name: EditWidget.routeName,
+          path: EditWidget.routePath,
+          asyncParams: {
+            'tableOrderDoc':
+                getDoc(['table_orders'], TableOrdersRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditWidget(
+            tableOrderDoc: params.getParam(
+              'tableOrderDoc',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: AgregarOrdenWidget.routeName,
+          path: AgregarOrdenWidget.routePath,
+          asyncParams: {
+            'productRef': getDoc(['products'], ProductsRecord.fromSnapshot),
+          },
+          builder: (context, params) => AgregarOrdenWidget(
+            productRef: params.getParam(
+              'productRef',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MenuWidget.routeName,
+          path: MenuWidget.routePath,
+          builder: (context, params) => MenuWidget(),
+        ),
+        FFRoute(
+          name: EditarOrdenWidget.routeName,
+          path: EditarOrdenWidget.routePath,
+          asyncParams: {
+            'carritoDocument': getDoc(['carrito'], CarritoRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditarOrdenWidget(
+            carritoDocument: params.getParam(
+              'carritoDocument',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ShowOrdenWidget.routeName,
+          path: ShowOrdenWidget.routePath,
+          asyncParams: {
+            'tableOrder':
+                getDoc(['table_orders'], TableOrdersRecord.fromSnapshot),
+          },
+          builder: (context, params) => ShowOrdenWidget(
+            tableOrder: params.getParam(
+              'tableOrder',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: PedidosDetalleLocalWidget.routeName,
+          path: PedidosDetalleLocalWidget.routePath,
+          asyncParams: {
+            'tableDocumentID':
+                getDoc(['table_orders'], TableOrdersRecord.fromSnapshot),
+          },
+          builder: (context, params) => PedidosDetalleLocalWidget(
+            tableDocumentID: params.getParam(
+              'tableDocumentID',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ShowProductInOrderWidget.routeName,
+          path: ShowProductInOrderWidget.routePath,
+          asyncParams: {
+            'tableOrderDetailsDoc': getDoc(
+                ['table_order_details'], TableOrderDetailsRecord.fromSnapshot),
+            'tableOrderDoc':
+                getDoc(['table_orders'], TableOrdersRecord.fromSnapshot),
+          },
+          builder: (context, params) => ShowProductInOrderWidget(
+            tableOrderDetailsDoc: params.getParam(
+              'tableOrderDetailsDoc',
+              ParamType.Document,
+            ),
+            tableOrderDoc: params.getParam(
+              'tableOrderDoc',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: EditarProductoOrdenWidget.routeName,
+          path: EditarProductoOrdenWidget.routePath,
+          asyncParams: {
+            'tableOrderDetailsDoc': getDoc(
+                ['table_order_details'], TableOrderDetailsRecord.fromSnapshot),
+            'tableOrderDoc':
+                getDoc(['table_orders'], TableOrdersRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditarProductoOrdenWidget(
+            tableOrderDetailsDoc: params.getParam(
+              'tableOrderDetailsDoc',
+              ParamType.Document,
+            ),
+            tableOrderDoc: params.getParam(
+              'tableOrderDoc',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: AgregarProductoOrdenWidget.routeName,
+          path: AgregarProductoOrdenWidget.routePath,
+          asyncParams: {
+            'tableOrderDoc':
+                getDoc(['table_orders'], TableOrdersRecord.fromSnapshot),
+            'productoDoc': getDoc(['products'], ProductsRecord.fromSnapshot),
+          },
+          builder: (context, params) => AgregarProductoOrdenWidget(
+            tableOrderDoc: params.getParam(
+              'tableOrderDoc',
+              ParamType.Document,
+            ),
+            productoDoc: params.getParam(
+              'productoDoc',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

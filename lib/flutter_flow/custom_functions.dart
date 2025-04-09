@@ -70,8 +70,8 @@ double subtotalCartFunction(List<CarritoRecord> carritoItems) {
 
   // Iterar a través de los items del carrito y sumar los subtotales
   for (var item in carritoItems) {
-    if (item.subtotal != null) {
-      subtotalCarrito += item.subtotal!;
+    if (item.total != null) {
+      subtotalCarrito += item.total!;
     }
   }
 
@@ -86,41 +86,16 @@ double calculateSubtotalBeforeEditFunction(
   return subtotalCarrito;
 }
 
-DocumentReference insertCustomerOrderFunction(
-  DocumentReference userRef,
-  DocumentReference paymentMethodRef,
-  bool deliveryMethod,
-  String description,
-  String paymentRecipt,
-  double subtotal,
-  double total,
-  DocumentReference stateRef,
-  bool paid,
-  DateTime orderDate,
-  String deliveryDirection,
-) {
-// Referencia de la colección 'customer_order'
-  CollectionReference customerOrderCollection =
-      FirebaseFirestore.instance.collection('customer_order');
+double subtotalTableFunction(
+    List<TableOrderDetailsRecord> tableOrdersDetailsDoc) {
+  double subtotalTable = 0;
 
-  // Crear un nuevo documento en 'customer_order' y obtener su referencia
-  DocumentReference newOrderRef = customerOrderCollection.doc();
+  // Iterar a través de los items del carrito y sumar los subtotales
+  for (var item in tableOrdersDetailsDoc) {
+    if (item.total != null) {
+      subtotalTable += item.total!;
+    }
+  }
 
-  // Insertar los datos en el nuevo documento
-  newOrderRef.set({
-    'userRef': userRef,
-    'payment_methodRef': paymentMethodRef,
-    'delivery_method': deliveryMethod,
-    'description': description,
-    'payment_receipt': paymentRecipt,
-    'subtotal': subtotal,
-    'total': total,
-    'stateRef': stateRef,
-    'paid': paid,
-    'order_date': orderDate,
-    'delivery_direction': deliveryDirection,
-  });
-
-  // Retornar la referencia del documento recién creado
-  return newOrderRef;
+  return subtotalTable;
 }

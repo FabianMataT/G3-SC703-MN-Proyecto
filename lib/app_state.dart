@@ -24,8 +24,8 @@ class FFAppState extends ChangeNotifier {
       _efectivoRef = prefs.getString('ff_efectivoRef')?.ref ?? _efectivoRef;
     });
     _safeInit(() {
-      _enValidacionRef =
-          prefs.getString('ff_enValidacionRef')?.ref ?? _enValidacionRef;
+      _stateCompleto =
+          prefs.getString('ff_stateCompleto')?.ref ?? _stateCompleto;
     });
   }
 
@@ -164,20 +164,74 @@ class FFAppState extends ChangeNotifier {
         : prefs.remove('ff_efectivoRef');
   }
 
-  DocumentReference? _enValidacionRef =
-      FirebaseFirestore.instance.doc('/states/3vP4ufLTadWQ7mxq0SO5');
-  DocumentReference? get enValidacionRef => _enValidacionRef;
-  set enValidacionRef(DocumentReference? value) {
-    _enValidacionRef = value;
-    value != null
-        ? prefs.setString('ff_enValidacionRef', value.path)
-        : prefs.remove('ff_enValidacionRef');
-  }
-
   DocumentReference? _customerOrderRef;
   DocumentReference? get customerOrderRef => _customerOrderRef;
   set customerOrderRef(DocumentReference? value) {
     _customerOrderRef = value;
+  }
+
+  bool _enElLocal = false;
+  bool get enElLocal => _enElLocal;
+  set enElLocal(bool value) {
+    _enElLocal = value;
+  }
+
+  List<String> _extraIngredientsName = [];
+  List<String> get extraIngredientsName => _extraIngredientsName;
+  set extraIngredientsName(List<String> value) {
+    _extraIngredientsName = value;
+  }
+
+  void addToExtraIngredientsName(String value) {
+    extraIngredientsName.add(value);
+  }
+
+  void removeFromExtraIngredientsName(String value) {
+    extraIngredientsName.remove(value);
+  }
+
+  void removeAtIndexFromExtraIngredientsName(int index) {
+    extraIngredientsName.removeAt(index);
+  }
+
+  void updateExtraIngredientsNameAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    extraIngredientsName[index] = updateFn(_extraIngredientsName[index]);
+  }
+
+  void insertAtIndexInExtraIngredientsName(int index, String value) {
+    extraIngredientsName.insert(index, value);
+  }
+
+  /// /states/DLaVaLkgeRojS2UuT1z8
+  DocumentReference? _stateCompleto =
+      FirebaseFirestore.instance.doc('/states/DLaVaLkgeRojS2UuT1z8');
+  DocumentReference? get stateCompleto => _stateCompleto;
+  set stateCompleto(DocumentReference? value) {
+    _stateCompleto = value;
+    value != null
+        ? prefs.setString('ff_stateCompleto', value.path)
+        : prefs.remove('ff_stateCompleto');
+  }
+
+  String _image = '';
+  String get image => _image;
+  set image(String value) {
+    _image = value;
+  }
+
+  String _categoriaSeleccionada = '';
+  String get categoriaSeleccionada => _categoriaSeleccionada;
+  set categoriaSeleccionada(String value) {
+    _categoriaSeleccionada = value;
+  }
+
+  DocumentReference? _categoriaRefSeleccionada;
+  DocumentReference? get categoriaRefSeleccionada => _categoriaRefSeleccionada;
+  set categoriaRefSeleccionada(DocumentReference? value) {
+    _categoriaRefSeleccionada = value;
   }
 }
 

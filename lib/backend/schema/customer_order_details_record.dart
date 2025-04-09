@@ -46,6 +46,16 @@ class CustomerOrderDetailsRecord extends FirestoreRecord {
   int get amount => _amount ?? 0;
   bool hasAmount() => _amount != null;
 
+  // "subtotal" field.
+  double? _subtotal;
+  double get subtotal => _subtotal ?? 0.0;
+  bool hasSubtotal() => _subtotal != null;
+
+  // "detalle_listo" field.
+  bool? _detalleListo;
+  bool get detalleListo => _detalleListo ?? false;
+  bool hasDetalleListo() => _detalleListo != null;
+
   void _initializeFields() {
     _customerOrderRef = snapshotData['customer_orderRef'] as DocumentReference?;
     _productRef = snapshotData['productRef'] as DocumentReference?;
@@ -53,6 +63,8 @@ class CustomerOrderDetailsRecord extends FirestoreRecord {
     _description = snapshotData['description'] as String?;
     _total = castToType<double>(snapshotData['total']);
     _amount = castToType<int>(snapshotData['amount']);
+    _subtotal = castToType<double>(snapshotData['subtotal']);
+    _detalleListo = snapshotData['detalle_listo'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -97,6 +109,8 @@ Map<String, dynamic> createCustomerOrderDetailsRecordData({
   String? description,
   double? total,
   int? amount,
+  double? subtotal,
+  bool? detalleListo,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -105,6 +119,8 @@ Map<String, dynamic> createCustomerOrderDetailsRecordData({
       'description': description,
       'total': total,
       'amount': amount,
+      'subtotal': subtotal,
+      'detalle_listo': detalleListo,
     }.withoutNulls,
   );
 
@@ -123,7 +139,9 @@ class CustomerOrderDetailsRecordDocumentEquality
         listEquality.equals(e1?.extraIngredients, e2?.extraIngredients) &&
         e1?.description == e2?.description &&
         e1?.total == e2?.total &&
-        e1?.amount == e2?.amount;
+        e1?.amount == e2?.amount &&
+        e1?.subtotal == e2?.subtotal &&
+        e1?.detalleListo == e2?.detalleListo;
   }
 
   @override
@@ -133,7 +151,9 @@ class CustomerOrderDetailsRecordDocumentEquality
         e?.extraIngredients,
         e?.description,
         e?.total,
-        e?.amount
+        e?.amount,
+        e?.subtotal,
+        e?.detalleListo
       ]);
 
   @override

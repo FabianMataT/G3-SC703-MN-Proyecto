@@ -1,11 +1,15 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -114,64 +118,207 @@ class _FinalizarCompraWidgetState extends State<FinalizarCompraWidget> {
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        'SMOKER\'S',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              color: Color(0xFFF5F5F9),
-                              fontSize: 20.0,
-                              letterSpacing: 0.0,
-                            ),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(HomeWidget.routeName);
+                        },
+                        child: Text(
+                          'SMOKER\'S',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    color: Color(0xFFF5F5F9),
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
                       ),
                     ],
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        'Inicio',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              color: Color(0xFFFDFEFF),
-                              letterSpacing: 0.0,
-                            ),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(HomeWidget.routeName);
+                        },
+                        child: Text(
+                          'Inicio',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    color: Color(0xFFFDFEFF),
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
                       ),
                     ],
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        'Menú',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              color: Color(0xFFFBFCFD),
-                              letterSpacing: 0.0,
+                      if (valueOrDefault(currentUserDocument?.role, '') ==
+                          'Admin')
+                        AuthUserStreamWidget(
+                          builder: (context) => FlutterFlowDropDown<String>(
+                            controller: _model.dropDownValueController ??=
+                                FormFieldController<String>(null),
+                            options: [
+                              'Ordenes',
+                              'Categorías',
+                              'Comanda',
+                              'Pedidos',
+                              'Reportes',
+                              'Productos'
+                            ],
+                            onChanged: (val) async {
+                              safeSetState(() => _model.dropDownValue = val);
+                              if (_model.dropDownValue == 'Pedidos') {
+                                context.pushNamed(PedidosWidget.routeName);
+                              } else {
+                                if (_model.dropDownValue == 'Ordenes') {
+                                  context.pushNamed(IndexWidget.routeName);
+                                } else {
+                                  if (_model.dropDownValue == 'Categorias') {
+                                    context
+                                        .pushNamed(CategoriasWidget.routeName);
+                                  } else {
+                                    if (_model.dropDownValue == 'Comanda') {
+                                      context.pushNamed(
+                                          ListadoComandaWidget.routeName);
+                                    } else {
+                                      if (_model.dropDownValue == 'Reportes') {
+                                        context.pushNamed(
+                                            ReportesWidget.routeName);
+                                      } else {
+                                        if (_model.dropDownValue ==
+                                            'Productos') {
+                                          context.pushNamed(
+                                              GestionDeProductosWidget
+                                                  .routeName);
+                                        } else {
+                                          return;
+                                        }
+
+                                        return;
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            width: 90.0,
+                            height: 40.0,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
+                                ),
+                            hintText: 'Menú',
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 24.0,
                             ),
-                      ),
+                            fillColor: FlutterFlowTheme.of(context).navColor,
+                            elevation: 2.0,
+                            borderColor: Colors.transparent,
+                            borderWidth: 0.0,
+                            borderRadius: 8.0,
+                            margin: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 12.0, 0.0),
+                            hidesUnderline: true,
+                            isOverButton: false,
+                            isSearchable: false,
+                            isMultiSelect: false,
+                          ),
+                        ),
                     ],
                   ),
                 ],
               ),
               actions: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FlutterFlowIconButton(
-                      borderRadius: 100.0,
-                      buttonSize: 40.0,
-                      fillColor: FlutterFlowTheme.of(context).smokers3,
-                      icon: FaIcon(
-                        FontAwesomeIcons.shoppingBag,
-                        color: FlutterFlowTheme.of(context).info,
-                        size: 24.0,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FutureBuilder<int>(
+                        future: queryCarritoRecordCount(
+                          queryBuilder: (carritoRecord) => carritoRecord.where(
+                            'userRef',
+                            isEqualTo: currentUserReference,
+                          ),
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          int badgeCount = snapshot.data!;
+
+                          return badges.Badge(
+                            badgeContent: Text(
+                              valueOrDefault<String>(
+                                badgeCount.toString(),
+                                '0',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Inter Tight',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            showBadge: true,
+                            shape: badges.BadgeShape.circle,
+                            badgeColor: FlutterFlowTheme.of(context).primary,
+                            elevation: 4.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                8.0, 8.0, 8.0, 8.0),
+                            position: badges.BadgePosition.topEnd(),
+                            animationType: badges.BadgeAnimationType.scale,
+                            toAnimate: true,
+                            child: FlutterFlowIconButton(
+                              borderRadius: 100.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).smokers3,
+                              icon: FaIcon(
+                                FontAwesomeIcons.shoppingBag,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                context.pushNamed(CarritoWidget.routeName);
+                              },
+                            ),
+                          );
+                        },
                       ),
-                      onPressed: () async {
-                        context.pushNamed(CarritoWidget.routeName);
-                      },
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
               centerTitle: false,
@@ -306,7 +453,9 @@ class _FinalizarCompraWidgetState extends State<FinalizarCompraWidget> {
                                                       MainAxisSize.max,
                                                   children: [
                                                     Hero(
-                                                      tag: 'ControllerImage',
+                                                      tag:
+                                                          containerProductsRecord
+                                                              .photoUrl,
                                                       transitionOnUserGestures:
                                                           true,
                                                       child: ClipRRect(
@@ -314,7 +463,8 @@ class _FinalizarCompraWidgetState extends State<FinalizarCompraWidget> {
                                                             BorderRadius
                                                                 .circular(12.0),
                                                         child: Image.network(
-                                                          'https://hips.hearstapps.com/hmg-prod/images/smash-burger-elle-gourmet-2-1669737278.jpg?crop=0.961111111111111xw:1xh;center,top&resize=1200:*',
+                                                          containerProductsRecord
+                                                              .photoUrl,
                                                           width: 80.0,
                                                           height: 80.0,
                                                           fit: BoxFit.fitWidth,
@@ -366,14 +516,14 @@ class _FinalizarCompraWidgetState extends State<FinalizarCompraWidget> {
                                                         Text(
                                                           formatNumber(
                                                             listViewCarritoRecord
-                                                                .subtotal,
+                                                                .total,
                                                             formatType:
                                                                 FormatType
                                                                     .decimal,
                                                             decimalType:
                                                                 DecimalType
                                                                     .automatic,
-                                                            currency: ' ₡',
+                                                            currency: '₡',
                                                           ),
                                                           textAlign:
                                                               TextAlign.start,
@@ -696,6 +846,8 @@ class _FinalizarCompraWidgetState extends State<FinalizarCompraWidget> {
                                                             FFAppState()
                                                                 .subtotalAmount),
                                                     false);
+                                            safeSetState(() {});
+                                            FFAppState().domicilio = false;
                                             safeSetState(() {});
                                           }
                                         },
@@ -1274,55 +1426,19 @@ class _FinalizarCompraWidgetState extends State<FinalizarCompraWidget> {
                                     16.0, 0.0, 16.0, 16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    await CustomerOrdersRecord.collection
-                                        .doc()
-                                        .set(createCustomerOrdersRecordData(
-                                          userRef: currentUserReference,
-                                          paymentMethodRef: FFAppState().sinpe
-                                              ? FFAppState().sinpeRef
-                                              : FFAppState().efectivoRef,
-                                          deliveryMethod: FFAppState().domicilio
-                                              ? _model.localValue?.toString()
-                                              : _model.domicilioValue
-                                                  ?.toString(),
-                                          description: _model
-                                              .direccionDomcilioTxtFTextController
-                                              .text,
-                                          paymentReceipt: _model
-                                              .comprobanteSinpeTxtFTextController
-                                              .text,
-                                          subtotal: FFAppState().subtotalAmount,
-                                          total: FFAppState().totalAmount,
-                                          stateRef:
-                                              FFAppState().enValidacionRef,
-                                          paid: false,
-                                          orderDate: getCurrentTimestamp,
-                                          deliveryDirection: _model
-                                              .direccionDomcilioTxtFTextController
-                                              .text,
-                                        ));
-                                    FFAppState().customerOrderRef =
-                                        functions.insertCustomerOrderFunction(
-                                            currentUserReference!,
-                                            FFAppState().sinpe
-                                                ? FFAppState().sinpeRef!
-                                                : FFAppState().efectivoRef!,
-                                            FFAppState().domicilio,
-                                            _model
-                                                .direccionDomcilioTxtFTextController
-                                                .text,
-                                            _model
-                                                .comprobanteSinpeTxtFTextController
-                                                .text,
-                                            FFAppState().subtotalAmount,
-                                            FFAppState().totalAmount,
-                                            FFAppState().enValidacionRef!,
-                                            false,
-                                            getCurrentTimestamp,
-                                            _model
-                                                .direccionDomcilioTxtFTextController
-                                                .text);
-                                    safeSetState(() {});
+                                    await actions.createCustomerOrderCA(
+                                      currentUserReference,
+                                      FFAppState().sinpe
+                                          ? FFAppState().sinpeRef
+                                          : FFAppState().efectivoRef,
+                                      FFAppState().domicilio,
+                                      _model.direccionDomcilioTxtFTextController
+                                          .text,
+                                      _model.comprobanteSinpeTxtFTextController
+                                          .text,
+                                      FFAppState().subtotalAmount,
+                                      FFAppState().totalAmount,
+                                    );
 
                                     context.pushNamed(HomeWidget.routeName);
                                   },
